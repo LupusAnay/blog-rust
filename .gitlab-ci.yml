@@ -8,7 +8,8 @@ stages:
 variables:
   POSTGRES_DB: blog
   POSTGRES_USER: lupusanay
-  POSTGRES_PASSWORD: ""
+  POSTGRES_PASSWORD: "qwerty"
+  DATABASE_URL: postgres://lupusanay:qwerty@localhost/blog
   CARGO_HOME: $CI_PROJECT_DIR/cargo
   APT_CACHE_DIR: $CI_PROJECT_DIR/apt
 
@@ -17,7 +18,7 @@ services:
 
 before_script:
   - apt-get update -yq
-  - apt-get install -o dir::cache::archives="$APT_CACHE_DIR" -y {{ DEPENDENCIES }}
+  - apt-get install -y postgresql-client libpq-dev
 
 test:
   stage: test
@@ -26,17 +27,6 @@ test:
     - cargo --version
     - cargo test --verbose
 
-pages:
-  stage: doc
-  script:
-    - cargo doc --no-deps
-    - mv target/doc public
-    - echo '<meta http-equiv="refresh" content="0; url={{ LIBRARY NAME }}">' > public/index.html
-  artifacts:
-    paths:
-      - public
-  only:
-    - master
 
 cache:
   paths:
