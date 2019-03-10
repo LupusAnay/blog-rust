@@ -24,8 +24,7 @@ test:
   variables:
     DATABASE_URL: postgres://lupusanay:qwerty@postgres/blog
   script:
-    - /cargo/bin/diesel setup
-    - /cargo/bin/diesel migration run
+    - cargo/bin/diesel migration run
     - rustc --version
     - cargo --version
     - cargo test --verbose
