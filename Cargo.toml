@@ -29,5 +29,5 @@ features = ["postgres"]
 [dependencies.dotenv]
 version = "0.13.0"
 
-[dev-dependencies]
-serde_json = "1.0.39"
+[dependencies.serde_json]
+version = "1.0.39"
