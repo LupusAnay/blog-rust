@@ -19,6 +19,7 @@ services:
 before_script:
   - apt-get update -yq
   - apt-get install -y postgresql-client libpq-dev
+  - rustup override set nightly
 
 test:
   stage: test
