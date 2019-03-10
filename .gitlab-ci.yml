@@ -20,6 +20,8 @@ before_script:
   - apt-get update -yq
   - apt-get install -y postgresql-client libpq-dev
   - rustup override set nightly
+  - cargo install diesel_cli --no-default-features --features postgres
+  - diesel migration run
 
 test:
   stage: test
