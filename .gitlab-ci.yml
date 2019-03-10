@@ -1,4 +1,4 @@
-image: 'rust:latest'
+image: 'rustlang/rust:nightly'
 
 stages:
   - test
@@ -8,8 +8,8 @@ stages:
 variables:
   POSTGRES_DB: blog
   POSTGRES_USER: lupusanay
-  POSTGRES_PASSWORD: "qwerty"
-  DATABASE_URL: postgres://lupusanay:qwerty@localhost/blog
+  POSTGRES_PASSWORD: qwerty
+  DATABASE_URL: postgres://lupusanay:qwerty@postgres/blog
   CARGO_HOME: $CI_PROJECT_DIR/cargo
   APT_CACHE_DIR: $CI_PROJECT_DIR/apt
 
