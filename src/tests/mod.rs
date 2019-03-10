@@ -35,9 +35,19 @@ fn test_create_post() {
         .header(ContentType::JSON)
         .body(serialized);
     let mut response = req.dispatch();
+
     assert_eq!(Status::Ok, response.status());
-    assert_eq!(ContentType::JSON, response.content_type().unwrap());
-    let _: Id = serde_json::from_str(&response.body_string().unwrap()).unwrap();
+
+    assert_eq!(
+        ContentType::JSON,
+        response
+            .content_type()
+            .expect("Could not read content type header")
+    );
+
+    let _: Id = serde_json::from_str(
+        &response.body_string().expect("Could not read the string body from response")
+    ).expect("Could not parse Id object from body");
 }
 
 #[test]

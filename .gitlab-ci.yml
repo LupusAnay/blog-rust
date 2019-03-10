@@ -28,6 +28,11 @@ test:
     - rustc --version
     - cargo --version
     - cargo test --verbose
+  cache:
+    paths:
+      - cargo/
+      - target/
+      - apt/
 
 
 cache:
