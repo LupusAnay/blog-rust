@@ -4,12 +4,12 @@ stages:
   - test
   - doc
   - build
+  - deploy
 
 variables:
   POSTGRES_DB: blog
   POSTGRES_USER: lupusanay
   POSTGRES_PASSWORD: qwerty
-  DATABASE_URL: postgres://lupusanay:qwerty@postgres/blog
   CARGO_HOME: $CI_PROJECT_DIR/cargo
   APT_CACHE_DIR: $CI_PROJECT_DIR/apt
 
@@ -17,15 +17,14 @@ services:
   - postgres:latest
 
 before_script:
-  - apt-get update -yq
-  - apt-get install -y postgresql-client libpq-dev
-  - rustup override set nightly
   - cargo install diesel_cli --no-default-features --features postgres
-  - diesel migration run
 
 test:
   stage: test
+  variables:
+    DATABASE_URL: postgres://lupusanay:qwerty@postgres/blog
   script:
+    - diesel migration run
     - rustc --version
     - cargo --version
     - cargo test --verbose
